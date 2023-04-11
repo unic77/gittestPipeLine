@@ -37,7 +37,24 @@ jobs:
           command: echo ${CIRCLE_BRANCH}
       # Run another step, the same as above; note that you can
       # invoke environment variable without curly braces.
-      
+    
+  insert-variables:
+    docker:
+      - image: cimg/python:3.10.2
+    executer: python/default 
+    steps:
+      - run:
+          name: "schow variabels connection_string"
+          command: echo ${connection_string}
+      - run:
+          name: "schow variabels container_name"
+          command: echo ${container_name}
+      - run:
+          name: "schow variabels storage_account_key"
+          command: echo ${storage_account_key}
+      - run:
+          name: "schow variabels storage_account_name"
+          command: echo ${storage_account_name}
       
 
 # Invoke jobs via workflows
@@ -47,3 +64,4 @@ workflows:
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
+      - insert-variables
